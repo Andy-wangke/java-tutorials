@@ -1,4 +1,4 @@
-package com.it.util.concurrent;
+package com.it.util.concurrent.exchange;
 
 
 class ExchangerProducer {
