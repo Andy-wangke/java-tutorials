@@ -13,6 +13,7 @@
   <packaging>pom</packaging>
   <name>patterns-parent</name>
   <modules>
-    <module>pattern.templatemethod</module>
+    <module>behavioral-patterns</module>
+    <module>creational-patterns</module>
   </modules>
 </project>
