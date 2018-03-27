@@ -23,13 +23,16 @@
 	</properties>
 	<modules>
 		<module>core-java-concurrency</module>
-    <module>ds-algorithms</module>
-    <module>webservice</module>
-    <module>core-java</module>
-    <module>apache-poi</module>
-    <module>core-java-io</module>
-    <module>guava-modules/guava-18</module>
-    <module>patterns-parent</module>
+		<module>ds-algorithms</module>
+		<module>webservice</module>
+		<module>core-java</module>
+		<module>apache-poi</module>
+		<module>core-java-io</module>
+		<module>guava-modules/guava-18</module>
+		<module>patterns-parent</module>
+		<module>guava-modules/guava-22</module>
+    <module>persistence-modules/spring-data-neo4j</module>
+    <module>springboot-parent</module>
   </modules>
 
 	<dependencies>
@@ -87,9 +90,22 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<plugins>
+			<!-- run unit tests of application -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven-surefire-plugin.version}</version>
+				<configuration>
+					<forkCount>3</forkCount>
+					<reuseForks>true</reuseForks>
+					<excludes>
+						<exclude>**/*IntegrationTest.java</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

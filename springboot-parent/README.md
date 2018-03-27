@@ -1,0 +1,2 @@
+### Relevant Scaffold
+Jhipster
