@@ -2,7 +2,7 @@
  * Copyright 2014 Hewlett-Packard. All rights reserved. <br>
  * HP Confidential. Use is subject to license terms.
  */
-package com.datastructure.binaryHeaps;
+package com.it.binaryHeaps;
 
 import java.util.Arrays;
 import java.util.Collection;

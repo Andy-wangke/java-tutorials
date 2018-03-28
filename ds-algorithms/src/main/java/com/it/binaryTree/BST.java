@@ -8,7 +8,6 @@ package com.it.binaryTree;
 
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.Queue;
 import java.util.Stack;
 
 public class BST<T extends Comparable<T>, value> implements Iterable<T>
@@ -402,7 +401,7 @@ public class BST<T extends Comparable<T>, value> implements Iterable<T>
    //level-order
    private class LevelOrderIterator implements Iterator<T>{
 
-       Queue<Node<T>> queue = new 
+        // Queue<Node<T>> queue = new
     public boolean hasNext() {
         return false;
     }
