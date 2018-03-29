@@ -1,4 +1,4 @@
-package com.it.mdm;
+package com.it;
 
 /**
  * Hello world!

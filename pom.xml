@@ -33,7 +33,8 @@
 		<module>guava-modules/guava-22</module>
     <module>persistence-modules/spring-data-neo4j</module>
     <module>springboot-parent</module>
-    <module>misc</module>
+    <module>misc/soa-sif</module>
+    <module>misc/solr-search-parent</module>
   </modules>
 
 	<dependencies>

@@ -6,12 +6,12 @@
     <groupId>com.andy</groupId>
     <artifactId>parent-module</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <relativePath>../../</relativePath>
   </parent>
   <groupId>com.it</groupId>
-  <artifactId>misc</artifactId>
+  <artifactId>soa-sif</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>misc</name>
-  <url>http://maven.apache.org</url>
+  <name>soa-sif</name>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
