@@ -4,7 +4,6 @@ import java.util.Iterator;
 
 
 /**
- * @author ke.wang@hpe.com
  * 
  *         <pre>
  * A BST is a binary tree where nodes are ordered in the following way:
@@ -12,8 +11,6 @@ import java.util.Iterator;
  *          the keys in the left subtree are less than the key in its parent node,in short L<P,
  *          the keys in the right subtree are more than the key in its parent node,in short P>R
  *          duplicate keys are not allowed.
- * 
- * 
  * </pre>
  * 
  *         <pre>

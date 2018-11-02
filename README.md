@@ -1,5 +1,7 @@
 A collection of small and case-based tutorials.And this repository is specifically focused on Java area.
 
+maven 3.1.1
+
 
 # How to Extend the project
 1. create sub-top-level parent:

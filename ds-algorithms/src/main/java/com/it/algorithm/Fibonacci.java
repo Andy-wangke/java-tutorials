@@ -1,14 +1,7 @@
-/**
- * Copyright 2014 Hewlett-Packard. All rights reserved. <br>
- * HP Confidential. Use is subject to license terms.
- */
 package com.it.algorithm;
 
 
 
-/**
- * @author ke.wang@hpe.com
- */
 public class Fibonacci {
 
     /**

@@ -1,4 +1,4 @@
-package com.it.mdm.common.utils;
+package com.it.common.utils;
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
@@ -14,12 +14,9 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import com.hp.it.mdm.core.processor.MessageProcessor;
-import com.siperian.sif.message.Record;
+//import com.hp.it.mdm.core.processor.MessageProcessor;
+//import com.siperian.sif.message.Record;
 
-/**
- * @author battier (fang.lu@hp.com)
- */
 public class CommonUtil    {
 	
 //	data format like "2001-12-17T09:30:47Z"
@@ -54,7 +51,7 @@ public class CommonUtil    {
 	 * @return 
 	 * @return 
 	 */
-	public static <T> T setFieldByColumn( T entity, String fieldName, Record dbRecord,  String columnName  ) {
+	/*public static <T> T setFieldByColumn( T entity, String fieldName, Record dbRecord,  String columnName  ) {
 		if(dbRecord.getField(columnName) == null) {
 			return entity;
 		}
@@ -119,7 +116,7 @@ public class CommonUtil    {
 			e.printStackTrace();
 		}
 		return entity;
-	}
+	}*/
 	
 	
 	

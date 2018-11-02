@@ -4,7 +4,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * @author ke.wang@hpe.com
+ * @author K.Andy 
  */
 public class ReentrantLockTest {
 

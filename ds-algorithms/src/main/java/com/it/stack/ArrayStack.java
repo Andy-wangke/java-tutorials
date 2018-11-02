@@ -1,9 +1,13 @@
 package com.it.stack;
 
-
+import com.it.stack.common.StackException;
+import com.it.stack.common.StackInterface;
 
 /**
  * @since
+ * 
+ * TODO:
+ * 1.dynamic stack abstraction, when top reaches capacity,we double up the stack size
  */
 public class ArrayStack<AnyType> implements StackInterface<AnyType> {
 
@@ -93,46 +97,5 @@ public class ArrayStack<AnyType> implements StackInterface<AnyType> {
             s.pop();
 
         System.out.println(s);
-    }
-}
-
-interface StackInterface<AnyType> {
-
-    /**
-     * Tests if the stack is empty.
-     */
-    public boolean isEmpty();
-
-    /**
-     * Removes and returns the item at the top of this stack.
-     */
-    public AnyType pop() throws StackException;
-
-    /**
-     * 
-     */
-    public AnyType peek();
-
-    /**
-     * 
-     */
-    public void push(AnyType e);
-
-    /**
-     * Removes all items from the stack.
-     */
-    public void clear();
-
-}
-
-@SuppressWarnings("serial")
-class StackException extends RuntimeException {
-
-    public StackException(String name) {
-        super(name);
-    }
-
-    public StackException() {
-        super();
     }
 }

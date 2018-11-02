@@ -1,15 +1,26 @@
 package com.it.linkedList;
+
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-
-
 /**
- * https://www.cs.cmu.edu/~adamchik/15-121/lectures/Recursions/code/LinkedList.java
- * 
- * @author ke.wang@hpe.com
+ * without recursively
  */
-public class LinkedList<AnyType> {
+public class LinkedList<AnyType> implements Iterable<AnyType> {
 
+    /*******************************************************
+     * The Node class
+     ********************************************************/
+     public static class Node<AnyType> {
+
+        private AnyType data;
+        private Node<AnyType> next;
+
+        public Node(AnyType data, Node<AnyType> next) {
+            this.data = data;
+            this.next = next;
+        }
+    }
 
     private Node<AnyType> head = null;
 
@@ -24,71 +35,130 @@ public class LinkedList<AnyType> {
         return head == null;
     }
 
+    /**
+     * Insert a new node of this list
+     * 
+     * @param item
+     * @return
+     */
     public Node<AnyType> addFirst(AnyType item) {
 
         head = new Node<AnyType>(item, head);
         return head;
     }
-    /**
-     * Recursively inserts a new node to the end of this list.
-     */
-    public void addLast(AnyType item) {
-        if (head == null) {
-            addFirst(item);
-        }else{
-            addLast(head, item);
-        }
-    }
-    
-    public void addLast(Node node, AnyType value) {
-        if (node.next != null) {
-            addLast(node.next, value);
-        } else {
-            node.next = new Node(value, null);
-        }
-    }
-
-    public AnyType getFirst() {
-        if (head == null)
-            throw new NoSuchElementException();
-        return head.data;
-    }
 
     /**
-     * remove the first element in the list logically
+     * get the first element of this list
      * 
      * @return
      */
-    public AnyType removeFirst(){
-        AnyType tmp = getFirst();
+    public Node<AnyType> getFirst() {
+
+        if (head == null)
+            throw new NoSuchElementException("LinkedList is null.");
+        return head;
+    }
+
+    /**
+     * Removes the first element of this list
+     * 
+     * @return
+     */
+    public AnyType removeFirst() {
+        Node<AnyType> first = getFirst();
         head = head.next;
-        return tmp;
+        return first.data;
     }
 
-    public String toString() {
-        return toString(head);
+    /**
+     * add a new node to the end of the list
+     * 
+     * @param data
+     */
+    public void addLast(AnyType data) {
+        if (head == null)
+            addFirst(data);
+        else {
+            Node<AnyType> tmp = head;
+            while (tmp.next != null)
+                tmp = tmp.next;
+            tmp.next = new Node<AnyType>(data, null);
+        }
     }
 
-    private String toString(Node node) {
-        if (node == null)
-            return "";
-        else
-            return node.data + " " + toString(node.next);
+    public AnyType getLast() {
+        if (head == null)
+            throw new NoSuchElementException();
+
+        Node<AnyType> tmp = head;
+        while (tmp.next != null)
+            tmp = tmp.next;
+        return tmp.data;
+    }
+
+    public void clear() {
+        head = null;
     }
 
     // create a deep copy
 
-    /*******************************************************
-     * The Node class
-     ********************************************************/
-    private static class Node<AnyType> {
-
-        private AnyType data;
-        private Node<AnyType> next;
-
-        public Node(AnyType data, Node<AnyType> next) {
-            this.data = data;
-            this.next = next;
+    /**
+     * Return a deep copy of a list Complexity O(n^2)
+     * 
+     * @return
+     */
+    public LinkedList<AnyType> copy1() {
+        LinkedList<AnyType> twin = new LinkedList<AnyType>();
+        Node<AnyType> tmp = head;
+        while (tmp != null) {
+            twin.addLast(tmp.data);// n
+            tmp = tmp.next;
         }
+        return twin;
+    }
+
+    /**
+     * return a deep copy of the list
+     * 
+     * @return
+     */
+    public LinkedList<AnyType> copy2() {
+        return null;
+    }
+
+    /**
+     * Return a deep copy of the immutable list
+     * It uses a tail reference
+     * 
+     * @return
+     */
+    public LinkedList<AnyType> copy3() {
+        return null;
+    }
+
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        for (Object x : this)
+            sb.append(x + " ");
+
+        return sb.toString();
+    }
+
+    /**
+     * debugging and testing
+     * 
+     * @param args
+     */
+    public static void main(String[] args) {
+        LinkedList<String> list = new LinkedList<>();
+        list.addLast("l");
+        list.addLast("i");
+        list.addLast("s");
+        list.addLast("t");
+    }
+
+    @Override
+    public Iterator<AnyType> iterator() {
+        return null;
     }
 }

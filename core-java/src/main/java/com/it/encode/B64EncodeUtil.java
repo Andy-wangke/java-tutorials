@@ -4,7 +4,7 @@ package com.it.encode;
 /**
  * TODO: unit test
  * 
- * @author ke.wang@hpe.com
+ * @author K.Andy Wang
  */
 public class B64EncodeUtil {
 

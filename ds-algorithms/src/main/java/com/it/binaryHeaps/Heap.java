@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 
 /**
- * @author ke.wang@hpe.com
+ * @author ke.wang
  */
 @SuppressWarnings("unchecked")
 public class Heap<AnyType extends Comparable<AnyType>> {

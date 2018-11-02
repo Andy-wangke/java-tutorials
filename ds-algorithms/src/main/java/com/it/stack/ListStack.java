@@ -1,5 +1,7 @@
 package com.it.stack;
 
+import com.it.stack.common.StackException;
+import com.it.stack.common.StackInterface;
 
 /*****************************************************************************
  * A linked list-based implementation of a stack.
@@ -37,9 +39,9 @@ public class ListStack<AnyType> implements StackInterface<AnyType> {
         return top == null;
     }
     
-    public AnyType pop() throws com.it.stack.StackException {
+    public AnyType pop() throws StackException {
         if (isEmpty())
-            throw new com.it.stack.StackException("the stack is empty.");
+            throw new StackException("the stack is empty.");
         AnyType data = top.data;
         top = top.next;
         return data;
@@ -50,7 +52,7 @@ public class ListStack<AnyType> implements StackInterface<AnyType> {
      */
     public AnyType peek() {
         if (isEmpty())
-            throw new com.it.stack.StackException("the stack is empty.");
+            throw new StackException("the stack is empty.");
         return top.data;
     }
 

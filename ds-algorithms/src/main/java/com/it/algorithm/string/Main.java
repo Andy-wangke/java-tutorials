@@ -1,10 +1,6 @@
 
 package com.it.algorithm.string;
 
-
-/**
- * @author ke.wang@hpe.com
- */
 class prt {
 
     void makeline(int k) {

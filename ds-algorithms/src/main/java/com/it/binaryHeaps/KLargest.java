@@ -13,6 +13,14 @@ import java.util.PriorityQueue;
 /**
  * find the kth largest element
  * 
+ * 
+ * <pre>
+ * Ref below to get four solutions
+ * http://faculty.simpson.edu/lydia.sinapova/www/cmsc250/LN250_Weiss/L10-SelectionProblem.htm
+ * 
+ * 
+ * </pre>
+ * 
  * @author ke.wang@hpe.com
  */
 public class KLargest {

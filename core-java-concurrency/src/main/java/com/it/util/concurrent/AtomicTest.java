@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * 测试Atomic 原子性
  * 
- * @author ke.wang@hpe.com
+ * @author K.Andy Wang
  */
 
 public class AtomicTest {

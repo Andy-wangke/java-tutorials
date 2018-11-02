@@ -6,7 +6,7 @@ import java.util.Vector;
 /**
  * 虽然vector是线程安全的，但多线程操作，还是存在线程安全问题
  * 
- * @author ke.wang@hpe.com
+ * @author K.Andy
  */
 public class VectorTest {
 

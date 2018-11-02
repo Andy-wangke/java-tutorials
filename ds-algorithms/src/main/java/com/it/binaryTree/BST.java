@@ -1,16 +1,22 @@
 package com.it.binaryTree;
 
 /**
- * ************************************************************************** The generic Binary Search Tree class. V.S.Adamchik 2010
+ * ************************************************************************** 
+ * The generic Binary Search Tree class. V.S.Adamchik 2010
  * 
  * @ref https://www.cs.cmu.edu/~adamchik/15-121/lectures/Trees/code/BST.java
+ * 
+ * recursive implementation
  *****************************************************************************/
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Queue;
 import java.util.Stack;
+import java.util.concurrent.ArrayBlockingQueue;
+import com.it.binaryTree.bst.BSTInterface;
 
-public class BST<T extends Comparable<T>, value> implements Iterable<T>
+public class BST<T extends Comparable<T>, value> implements Iterable<T>,BSTInterface<T>
 {
    public static void main(String[] args)
    {
@@ -51,6 +57,12 @@ public class BST<T extends Comparable<T>, value> implements Iterable<T>
       System.out.println("diameter = " + bst.diameter());
       //testing width
       System.out.println("width = " + bst.width());
+      
+      System.out.println("inOrderIterator:");
+      Iterator<Integer> iterator = bst.iterator();
+      while(iterator.hasNext()){
+          System.out.print(iterator.next()+" ");
+      }
    }
 
 
@@ -353,16 +365,19 @@ public class BST<T extends Comparable<T>, value> implements Iterable<T>
 *
 ******************************************************/
 
+   /**
+    * Non-recursive Traversals
+    */
    public Iterator<T> iterator()
    {
-      return new MyIterator();
+      return new PreOrderIterator();
    }
    //pre-order
-   private class MyIterator implements Iterator<T>
+   private class PreOrderIterator implements Iterator<T>
    {
       Stack<Node<T>> stk = new Stack<Node<T>>();
 
-      public MyIterator()
+      public PreOrderIterator()
       {
          if(root != null) stk.push(root);
       }
@@ -394,14 +409,37 @@ public class BST<T extends Comparable<T>, value> implements Iterable<T>
 
       public void remove()
       {
-
+          throw new UnsupportedOperationException();
       }
-   }//end of MyIterator
+   }//end of preOrderIterator
+   
+   //mid-order
+   private class InOrderIterator implements Iterator<Node>{
+
+    @Override
+    public boolean hasNext() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public Node next() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void remove() {
+        // TODO Auto-generated method stub
+        
+    }
+       
+   }
    
    //level-order
    private class LevelOrderIterator implements Iterator<T>{
 
-        // Queue<Node<T>> queue = new
+    Queue<Node<T>> queue = new ArrayBlockingQueue<Node<T>>(10);
     public boolean hasNext() {
         return false;
     }
@@ -422,7 +460,7 @@ public class BST<T extends Comparable<T>, value> implements Iterable<T>
 *
 ******************************************************/
 
-   private class Node<T>
+   public class Node<T>
    {
       private T data;
       private Node<T> left, right;
