@@ -47,7 +47,7 @@ public abstract class AVLBaseTree<AnyType> {
     
     
     public AVLNode<AnyType> search(AnyType e){
-        AVLNode<AnyType> node=new AVLNode<AnyType>();
+        AVLNode<AnyType> node=new AVLNode<AnyType>(e);
         
         
         

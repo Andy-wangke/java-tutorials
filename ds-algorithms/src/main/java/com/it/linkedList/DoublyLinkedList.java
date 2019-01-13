@@ -4,7 +4,6 @@
 package com.it.linkedList;
 
 import java.util.Iterator;
-import com.it.linkedList.common.ListInterface;
 
 /**
  * 
