@@ -68,6 +68,7 @@ public class MergeSort extends BaseSort {
             arr[rEnd] = tmp[rEnd];
         }
         System.out.println("tmp.toString():" + Arrays.toString(tmp));
+        System.out.println("arr.toString():" + Arrays.toString(arr));
     }
     
 /**
@@ -81,8 +82,8 @@ public class MergeSort extends BaseSort {
  */
 
     public static void main(String[] args) {
-        Integer[] a = { 7, 8, 2, 6, 3, 5, 1 };
+        Integer[] a = { 7, 8, 2, 6, 3, 5, 10 };
         mergeSort(a);
-        System.out.println(Arrays.toString(a));
+        //System.out.println(Arrays.toString(a));
     }
 }

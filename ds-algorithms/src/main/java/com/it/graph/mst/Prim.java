@@ -1,4 +1,4 @@
-package com.it.graph.spAlgorithm;
+package com.it.graph.mst;
 
 
 /**
@@ -7,5 +7,5 @@ package com.it.graph.spAlgorithm;
  *
  */
 public class Prim {
-
+    
 }

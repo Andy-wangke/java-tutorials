@@ -54,30 +54,30 @@ public class BinarySearchTree<T> implements Iterable<T> {
 
     }
 
-    public void displayBeforeOrder(TreeNode<?> node) {
+    public void traversalPreOrder(TreeNode<?> node) {
         if (node == null) {
             return;
         }
         System.out.print(node.getData());
-        displayBeforeOrder(node.leftNode);
-        displayBeforeOrder(node.rightNode);
+        traversalPreOrder(node.leftNode);
+        traversalPreOrder(node.rightNode);
     }
 
-    public void displayMiddleOrder(TreeNode<?> node) {
+    public void traversalInOrder(TreeNode<?> node) {
         if (node == null) {
             return;
         }
-        displayBeforeOrder(node.leftNode);
+        traversalInOrder(node.leftNode);
         System.out.print(node.getData());
-        displayBeforeOrder(node.rightNode);
+        traversalInOrder(node.rightNode);
     }
 
-    public void displayafterOrder(TreeNode<?> node) {
+    public void traversalPostOrder(TreeNode<?> node) {
         if (node == null) {
             return;
         }
-        displayBeforeOrder(node.leftNode);
-        displayBeforeOrder(node.rightNode);
+        traversalPostOrder(node.leftNode);
+        traversalPostOrder(node.rightNode);
         System.out.print(node.getData());
     }
 
@@ -123,6 +123,11 @@ public class BinarySearchTree<T> implements Iterable<T> {
         return this.countLeaves(root);
     }
 
+    /**
+     * recursive
+     * @param node
+     * @return
+     */
     public int countLeaves(TreeNode<?> node) {
         if (node == null) {
             return 0;

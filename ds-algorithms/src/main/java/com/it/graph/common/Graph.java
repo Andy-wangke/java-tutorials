@@ -4,20 +4,24 @@ public class Graph {
 
     
     /**
-     * 
+     * Vertex or Node
      * @author K.Andy Wang
      *
      */
-    private class Vertex{
+    protected class Vertex{
         private String id;
         private Edge edges;
+        
+        
+        
+        
     }
     /**
      * represents arcs which connect a pair of vertices
      * 
      * @author K.Andy Wang
      */
-    private class Edge {
+    protected class Edge {
 
         private int dest;
         private int source;

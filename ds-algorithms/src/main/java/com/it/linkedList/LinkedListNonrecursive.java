@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 /**
  * without recursively
  */
-public class LinkedList<AnyType> implements Iterable<AnyType> {
+public class LinkedListNonrecursive<AnyType> implements Iterable<AnyType> {
 
     /*******************************************************
      * The Node class
@@ -24,7 +24,7 @@ public class LinkedList<AnyType> implements Iterable<AnyType> {
 
     private Node<AnyType> head = null;
 
-    public LinkedList() {
+    public LinkedListNonrecursive() {
         head = null;
     }
 
@@ -107,8 +107,8 @@ public class LinkedList<AnyType> implements Iterable<AnyType> {
      * 
      * @return
      */
-    public LinkedList<AnyType> copy1() {
-        LinkedList<AnyType> twin = new LinkedList<AnyType>();
+    public LinkedListNonrecursive<AnyType> copy1() {
+        LinkedListNonrecursive<AnyType> twin = new LinkedListNonrecursive<AnyType>();
         Node<AnyType> tmp = head;
         while (tmp != null) {
             twin.addLast(tmp.data);// n
@@ -122,7 +122,7 @@ public class LinkedList<AnyType> implements Iterable<AnyType> {
      * 
      * @return
      */
-    public LinkedList<AnyType> copy2() {
+    public LinkedListNonrecursive<AnyType> copy2() {
         return null;
     }
 
@@ -132,7 +132,7 @@ public class LinkedList<AnyType> implements Iterable<AnyType> {
      * 
      * @return
      */
-    public LinkedList<AnyType> copy3() {
+    public LinkedListNonrecursive<AnyType> copy3() {
         return null;
     }
 
@@ -150,7 +150,7 @@ public class LinkedList<AnyType> implements Iterable<AnyType> {
      * @param args
      */
     public static void main(String[] args) {
-        LinkedList<String> list = new LinkedList<>();
+        LinkedListNonrecursive<String> list = new LinkedListNonrecursive<>();
         list.addLast("l");
         list.addLast("i");
         list.addLast("s");
