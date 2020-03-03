@@ -1,4 +1,4 @@
-package com.it.utils;
+package com.it.common.utils;
 
 /**
  * User: rmangena
