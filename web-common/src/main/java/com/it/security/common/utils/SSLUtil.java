@@ -42,7 +42,7 @@ public class SSLUtil {
         try {
             //create SSLContext for SSL/TSLv1 protocol
             SSLContext sslContext = SSLContext.getInstance("SSL");
-            //SSLContext sslContext = SSLContext.getInstance("TLSv1.2")
+            //SSLContext sslContext = SSLContext.getInstance("TLS")
             sslContext.init(null, tmAllCerts, new SecureRandom());
             HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
         } catch (NoSuchAlgorithmException e) {

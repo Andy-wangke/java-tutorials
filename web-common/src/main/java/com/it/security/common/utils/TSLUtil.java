@@ -12,7 +12,6 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 
 public class TSLUtil {
-
     // create a SSLContext for TLSv1.2 protocol
     private static SSLContext createSSLContext() {
         SSLContext sslContext = null;
