@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
  * 
  * This class is designed to send email.
  * 
- * @author jian.he3@hp.com
  * 
  */
 public class EmailFactory {
