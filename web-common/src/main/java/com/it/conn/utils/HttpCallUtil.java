@@ -10,9 +10,20 @@ import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
+import java.net.URLConnection;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.Map;
 import java.util.logging.Logger;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 import javax.ws.rs.core.MultivaluedMap;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
@@ -30,15 +41,19 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.protocol.HTTP;
 import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.WebResource.Builder;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.client.filter.LoggingFilter;
 import com.sun.jersey.api.json.JSONConfiguration;
+import com.sun.jersey.client.urlconnection.HTTPSProperties;
+import com.sun.jersey.client.urlconnection.HttpURLConnectionFactory;
+import com.sun.jersey.client.urlconnection.URLConnectionClientHandler;
 
 public class HttpCallUtil {
-    
+
     private static Logger jutil_logger = Logger.getLogger(HttpCallUtil.class.getName());
 
     private static final int MAX_RETRY = 3;
@@ -105,7 +120,6 @@ public class HttpCallUtil {
     }
 
     /**
-     * 
      * @param endpoint
      * @param headers
      * @param isSSLCall
@@ -221,42 +235,160 @@ public class HttpCallUtil {
         }
         return null;
     }
-    
-    
-    //TODO Axis Client proxy
-    
-    //TODO Jersey client proxy
-    public static String jerseyClientWithPost(String restUrl,MultivaluedMap<String, String> paramMap, Map<String, String> headerMap,String mediaType){
+
+    // TODO Axis Client proxy
+
+    //Jersey client proxy
+    public static String jerseyClientWithPost(String restUrl, MultivaluedMap<String, String> paramMap, Map<String, String> headerMap,
+        Object requestBody, String mediaType) throws NoSuchAlgorithmException {
         ClientConfig clientConfig = new DefaultClientConfig();
-        
-        //clientConfig.getClasses().add(arg0);
+
+        // clientConfig.getClasses().add(arg0);
         clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, true);
-        
-        if(restUrl.startsWith("https")){
+
+        if (restUrl.startsWith("https")) {
             //set https certificate
+            setHttpsCertificate(clientConfig);
         }
-        
-        Client client = Client.create(clientConfig);
+        // proxy
+        Client client = new Client(new URLConnectionClientHandler(new ProxyFilterFactory(proxy_Host, proxy_Port)), clientConfig);
         client.setConnectTimeout(CONNECTION_TIMEOUT);
         client.setReadTimeout(CONNECTION_TIMEOUT);
         client.addFilter(new LoggingFilter(jutil_logger));
-        //proxy
-        
-        //params
+
+        // params
         WebResource resource = client.resource(restUrl).queryParams(paramMap);
-        
+
         Builder requestBuilder = resource.getRequestBuilder();
-        //headers
-        
-        
-        
-        //
-        
-        
-        
+        if (mediaType != null) {
+            requestBuilder.type(mediaType);
+        }
+        // headers
+        if (!headerMap.isEmpty()) {
+            for (Map.Entry<String, String> entry : headerMap.entrySet()) {
+                requestBuilder.header(entry.getKey(), entry.getValue());
+            }
+        }
+        ClientResponse response = null;
+
+        BufferedReader br = null;
+        StringBuffer sb = new StringBuffer();
+        int retry = 0;
+        boolean isNeedRetry;
+        while (retry < MAX_RETRY) {
+            isNeedRetry = false;
+            try {
+                if (requestBody == null) {
+                    response = requestBuilder.post(ClientResponse.class);
+                } else {
+                    response = requestBuilder.post(ClientResponse.class, requestBody);
+                }
+                if (200 == response.getStatus()) {// OK
+                    br = new BufferedReader(new InputStreamReader(response.getEntityInputStream(), "utf-8"));
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line);
+                    }
+                    return sb.toString();
+                }
+            } catch (Exception e) {
+                retry++;
+                isNeedRetry = true;
+
+                if (retry >= MAX_RETRY) {
+                    throw new RuntimeException(e);
+                }
+            } finally {
+                if (br != null) {
+                    try {
+                        br.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                if (response != null) {
+                    try {
+                        response.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            if (!isNeedRetry)
+                break;
+        }
+        return null;
+
     }
-    
+
+    private static void setHttpsCertificate(ClientConfig clientConfig) {
+
+        /* Create a trust manager that does not validate certificate chains */
+        TrustManager[] tmAllCerts = new TrustManager[] { new X509TrustManager() {
+
+            @Override
+            public X509Certificate[] getAcceptedIssuers() {
+                // TODO Auto-generated method stub
+                return null;
+            }
+
+            @Override
+            public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+                // TODO Auto-generated method stub
+
+            }
+        } };
+        SSLContext sslContext = null;
+        try {
+            // create SSLContext for SSL/TSLv1 protocol
+            sslContext = SSLContext.getInstance("TLS");
+            sslContext.init(null, tmAllCerts, new SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
+        } catch (NoSuchAlgorithmException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (KeyManagementException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        /*
+         * Create a HTTPS Properties with defautl Host Verifier which returns true
+         */
+        clientConfig.getProperties().put(HTTPSProperties.PROPERTY_HTTPS_PROPERTIES, new HTTPSProperties(new HostnameVerifier() {
+
+            public boolean verify(String hostname, SSLSession session) {
+                // TODO Auto-generated method stub
+                return true;
+            }
+        }, sslContext));
+
+    }
+
+    private static class ProxyFilterFactory implements HttpURLConnectionFactory {
+
+        private String host;
+        private int port;
+
+        public ProxyFilterFactory(String host, int port) {
+            this.host = host;
+            this.port = port;
+        }
+
+        @Override
+        public HttpURLConnection getHttpURLConnection(URL url) throws IOException {
+            URLConnection con = url.openConnection(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(host, port)));
+            return (HttpURLConnection) con;
+        }
+    }
+
     public static void main(String[] args) {
-        //test case
+        // test case
     }
 }
