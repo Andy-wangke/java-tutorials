@@ -1,4 +1,4 @@
-package com.it.binaryTree;
+package com.it.binaryTree.bst;
 
 /**
  * ************************************************************************** 
@@ -14,7 +14,6 @@ import java.util.Iterator;
 import java.util.Queue;
 import java.util.Stack;
 import java.util.concurrent.ArrayBlockingQueue;
-import com.it.binaryTree.bst.BSTInterface;
 
 public class BST<T extends Comparable<T>, value> implements Iterable<T>,BSTInterface<T>
 {
@@ -135,6 +134,22 @@ public class BST<T extends Comparable<T>, value> implements Iterable<T>,BSTInter
       else
          return search(p.right, toSearch);
    }
+
+    public Node<T> search2(Node<T> p, T toSearch) {
+        Node<T> x = p;
+        while (toSearch.compareTo(x.data) != 0) {
+            if (toSearch.compareTo(x.data) < 0) {
+                x = x.left;
+            } else {
+                x = x.right;
+            }
+        }
+        if (x == p) {
+            return null;
+        } else {
+            return x;
+        }
+    }
 
 /*****************************************************
 *

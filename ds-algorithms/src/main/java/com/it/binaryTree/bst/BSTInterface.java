@@ -1,7 +1,5 @@
 package com.it.binaryTree.bst;
 
-import com.it.binaryTree.BST;
-
 public interface BSTInterface<T> {
 
     /*****************************************************

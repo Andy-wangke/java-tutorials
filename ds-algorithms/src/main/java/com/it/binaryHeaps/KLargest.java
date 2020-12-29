@@ -21,7 +21,6 @@ import java.util.PriorityQueue;
  * 
  * </pre>
  * 
- * @author ke.wang@hpe.com
  */
 public class KLargest {
 

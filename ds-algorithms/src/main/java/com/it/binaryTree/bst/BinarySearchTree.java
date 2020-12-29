@@ -1,4 +1,4 @@
-package com.it.binaryTree;
+package com.it.binaryTree.bst;
 
 import java.util.Iterator;
 

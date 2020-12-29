@@ -1,4 +1,4 @@
-package com.it.binaryTree;
+package com.it.binaryTree.bst;
 
 /******************************************************************************
  * Compilation: javac BST.java Execution: java BST Dependencies: StdIn.java StdOut.java Queue.java Data files:
